@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var allPuzzleTiles = [];
     var emptySpaceLocation = { x: 3, y: 3 };
 
+
     // Creating and placing each puzzle tile
     for (var tileNumber = 0; tileNumber < 15; tileNumber++) {
         var singleTile = document.createElement('div');
@@ -17,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // Click event for each tile
         singleTile.addEventListener('click', function() {
             moveSelectedTile(this);
+            highlightMovableTiles();
         });
-
         puzzleContainer.appendChild(singleTile);
         allPuzzleTiles.push(singleTile);
     }
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var shuffleTilesButton = document.getElementById('shufflebutton');
     shuffleTilesButton.addEventListener('click', function() {
         shufflePuzzleTiles();
+        highlightMovableTiles();
     });
 
     // Solve button event
@@ -46,8 +48,9 @@ document.addEventListener("DOMContentLoaded", function() {
             tileToMove.style.top = emptySpaceLocation.y * 100 + 'px';
             emptySpaceLocation.x = tileXPos;
             emptySpaceLocation.y = tileYPos;
-        }
     }
+}
+
 
     // Function to check if a tile can be moved
     function canTileBeMoved(tileX, tileY) {
@@ -66,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+
     // Function to find tiles that can be moved
     function findMovableTiles() {
         var movableTiles = [];
@@ -74,10 +78,37 @@ document.addEventListener("DOMContentLoaded", function() {
             var tileXPos = parseInt(currentTile.style.left) / 100;
             var tileYPos = parseInt(currentTile.style.top) / 100;
             if (canTileBeMoved(tileXPos, tileYPos)) {
-                movableTiles.push({ element: currentTile });
+                movableTiles.push({ element: currentTile});
             }
+
         }
         return movableTiles;
+    }  
+
+    // Function to add the movablepiece class to the tile that can be moved
+    function highlightMovableTiles() {
+        var movableTiles = findMovableTiles();
+        allPuzzleTiles.forEach(tile => {
+            tile.removeEventListener('mouseenter', handleMouseOver);
+            tile.removeEventListener('mouseleave', handleMouseLeave);
+            tile.classList.remove('movablepiece');
+        });
+    
+        movableTiles.forEach(tileObject => {
+            var tile = tileObject.element;
+            tile.addEventListener('mouseenter', handleMouseOver);
+            tile.addEventListener('mouseleave', handleMouseLeave);
+        });
+    
+        function handleMouseOver() {
+            if (canTileBeMoved(parseInt(this.style.left) / 100, parseInt(this.style.top) / 100)) {
+                this.classList.add('movablepiece');
+            }
+        }
+    
+        function handleMouseLeave() {
+            this.classList.remove('movablepiece');
+        }
     }
 
     // Function to reset the puzzle
@@ -91,5 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         emptySpaceLocation.x = 3;
         emptySpaceLocation.y = 3;
+
+        highlightMovableTiles();
     }
 });
