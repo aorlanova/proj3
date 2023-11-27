@@ -1,0 +1,31 @@
+#puzzlearea {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    margin: auto;
+}
+
+.tile {
+    width: 96px;
+    height: 96px;
+    border: 2px solid black;
+    position: absolute;
+    font-size: 32pt;
+    text-align: center;
+    line-height: 96px;
+    background-image: url('car.avif');
+    font-family: sans-serif;
+}
+
+.movablepiece {
+    border-color: red;
+    color: #006600;
+    text-decoration: underline;
+}
+
+#shufflebutton {
+    display: block;
+    margin: 20px auto;
+}
+
+/* Additional styles for validators and JSLint links */
