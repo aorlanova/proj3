@@ -2,6 +2,17 @@ document.addEventListener("DOMContentLoaded", function() {
     var puzzleContainer = document.getElementById('puzzlearea');
     var allPuzzleTiles = [];
     var emptySpaceLocation = { x: 3, y: 3 };
+    var x = document.getElementById("myAudio"); 
+    var playButton = document.getElementById("play");
+    var pause = document.getElementById("pause");
+
+    playButton.addEventListener('click', function() {
+        x.play();
+    });
+
+    pause.addEventListener('click', function() {
+        x.pause();
+    });
 
     // Creating and placing each puzzle tile
     for (var tileNumber = 0; tileNumber < 15; tileNumber++) {
