@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
         x.pause();
     });
 
+
+    // Creating and placing each puzzle tile
     for (var tileNumber = 0; tileNumber < 15; tileNumber++) {
         var singleTile = document.createElement('div');
         singleTile.className = 'tile';
@@ -27,8 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         singleTile.addEventListener('click', function() {
             moveSelectedTile(this);
+            highlightMovableTiles();
         });
-
         puzzleContainer.appendChild(singleTile);
         allPuzzleTiles.push(singleTile);
     }
@@ -36,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var shuffleTilesButton = document.getElementById('shufflebutton');
     shuffleTilesButton.addEventListener('click', function() {
         shufflePuzzleTiles();
+        highlightMovableTiles();
     });
 
     var solvePuzzleButton = document.getElementById('solvebutton');
@@ -59,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+
     function canTileBeMoved(tileX, tileY) {
         var adjacentToEmptyX = tileX === emptySpaceLocation.x && Math.abs(tileY - emptySpaceLocation.y) === 1;
         var adjacentToEmptyY = tileY === emptySpaceLocation.y && Math.abs(tileX - emptySpaceLocation.x) === 1;
@@ -78,6 +82,8 @@ document.addEventListener("DOMContentLoaded", function() {
         isShuffling = false;
     }
 
+
+    // Function to find tiles that can be moved
     function findMovableTiles() {
         var movableTiles = [];
         for (var i = 0; i < allPuzzleTiles.length; i++) {
@@ -85,10 +91,37 @@ document.addEventListener("DOMContentLoaded", function() {
             var tileXPos = parseInt(currentTile.style.left) / 100;
             var tileYPos = parseInt(currentTile.style.top) / 100;
             if (canTileBeMoved(tileXPos, tileYPos)) {
-                movableTiles.push({ element: currentTile });
+                movableTiles.push({ element: currentTile});
             }
+
         }
         return movableTiles;
+    }  
+
+    // Function to add the movablepiece class to the tile that can be moved
+    function highlightMovableTiles() {
+        var movableTiles = findMovableTiles();
+        allPuzzleTiles.forEach(tile => {
+            tile.removeEventListener('mouseenter', handleMouseOver);
+            tile.removeEventListener('mouseleave', handleMouseLeave);
+            tile.classList.remove('movablepiece');
+        });
+    
+        movableTiles.forEach(tileObject => {
+            var tile = tileObject.element;
+            tile.addEventListener('mouseenter', handleMouseOver);
+            tile.addEventListener('mouseleave', handleMouseLeave);
+        });
+    
+        function handleMouseOver() {
+            if (canTileBeMoved(parseInt(this.style.left) / 100, parseInt(this.style.top) / 100)) {
+                this.classList.add('movablepiece');
+            }
+        }
+    
+        function handleMouseLeave() {
+            this.classList.remove('movablepiece');
+        }
     }
 
     function resetPuzzleToInitialState() {
@@ -101,6 +134,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         emptySpaceLocation.x = 3;
         emptySpaceLocation.y = 3;
+
+        highlightMovableTiles();
     }
 
     function isPuzzleSolved() {
