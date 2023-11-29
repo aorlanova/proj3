@@ -28,3 +28,18 @@
     margin: 20px auto;
 }
 
+#play {
+    position: relative;
+    margin-left: 42%;
+}
+
+body {
+    background-image: url(Screenshot\ 2566-11-28\ at\ 4.22.48\ PM.png);
+}
+
+button {
+    height: 30px;
+    width: auto;
+    border-width: 3px;
+    font-weight: bolder;
+}

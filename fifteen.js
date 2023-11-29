@@ -2,6 +2,18 @@ document.addEventListener("DOMContentLoaded", function() {
     var puzzleContainer = document.getElementById('puzzlearea');
     var allPuzzleTiles = [];
     var emptySpaceLocation = { x: 3, y: 3 };
+    var isShuffling = false;
+    var x = document.getElementById("myAudio"); 
+    var playButton = document.getElementById("play");
+    var pauseButton = document.getElementById("pause");
+
+    playButton.addEventListener('click', function() {
+        x.play();
+    });
+
+    pauseButton.addEventListener('click', function() {
+        x.pause();
+    });
 
 
     // Creating and placing each puzzle tile
@@ -15,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
         singleTile.style.top = verticalPosition + 'px';
         singleTile.style.backgroundPosition = '-' + horizontalPosition + 'px -' + verticalPosition + 'px';
 
-        // Click event for each tile
         singleTile.addEventListener('click', function() {
             moveSelectedTile(this);
             highlightMovableTiles();
@@ -24,49 +35,51 @@ document.addEventListener("DOMContentLoaded", function() {
         allPuzzleTiles.push(singleTile);
     }
 
-    // Shuffle button event
     var shuffleTilesButton = document.getElementById('shufflebutton');
     shuffleTilesButton.addEventListener('click', function() {
         shufflePuzzleTiles();
         highlightMovableTiles();
     });
 
-    // Solve button event
     var solvePuzzleButton = document.getElementById('solvebutton');
     solvePuzzleButton.addEventListener('click', function() {
         resetPuzzleToInitialState();
     });
 
-    // Function to move a tile
     function moveSelectedTile(tileToMove) {
         var tileXPos = parseInt(tileToMove.style.left) / 100;
         var tileYPos = parseInt(tileToMove.style.top) / 100;
 
-        // Check if the tile can be moved
         if (canTileBeMoved(tileXPos, tileYPos)) {
             tileToMove.style.left = emptySpaceLocation.x * 100 + 'px';
             tileToMove.style.top = emptySpaceLocation.y * 100 + 'px';
             emptySpaceLocation.x = tileXPos;
             emptySpaceLocation.y = tileYPos;
+
+            if (!isShuffling && isPuzzleSolved()) {
+                displaySolvedNotification();
+            }
+        }
     }
-}
 
 
-    // Function to check if a tile can be moved
     function canTileBeMoved(tileX, tileY) {
         var adjacentToEmptyX = tileX === emptySpaceLocation.x && Math.abs(tileY - emptySpaceLocation.y) === 1;
         var adjacentToEmptyY = tileY === emptySpaceLocation.y && Math.abs(tileX - emptySpaceLocation.x) === 1;
         return adjacentToEmptyX || adjacentToEmptyY;
     }
 
-    // Function to shuffle the tiles
     function shufflePuzzleTiles() {
+        isShuffling = true;
+
         for (var i = 0; i < 300; i++) {
             var movableTiles = findMovableTiles();
             var randomTileIndex = Math.floor(Math.random() * movableTiles.length);
             var tileToShuffle = movableTiles[randomTileIndex];
             moveSelectedTile(tileToShuffle.element);
         }
+
+        isShuffling = false;
     }
 
 
@@ -111,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Function to reset the puzzle
     function resetPuzzleToInitialState() {
         for (var i = 0; i < 15; i++) {
             var currentTile = allPuzzleTiles[i];
@@ -124,5 +136,23 @@ document.addEventListener("DOMContentLoaded", function() {
         emptySpaceLocation.y = 3;
 
         highlightMovableTiles();
+    }
+
+    function isPuzzleSolved() {
+        for (var i = 0; i < allPuzzleTiles.length; i++) {
+            var correctXPosition = (i % 4) * 100;
+            var correctYPosition = Math.floor(i / 4) * 100;
+            var currentTile = allPuzzleTiles[i];
+
+            if (parseInt(currentTile.style.left) !== correctXPosition ||
+                parseInt(currentTile.style.top) !== correctYPosition) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function displaySolvedNotification() {
+        alert("Congratulations! You've solved the puzzle!");
     }
 });
