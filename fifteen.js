@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var x = document.getElementById("myAudio"); 
     var playButton = document.getElementById("play");
     var pauseButton = document.getElementById("pause");
+    var y = document.getElementById("intenseAud");
+    var moveCount = 0;
+    var cancel;
 
     playButton.addEventListener('click', function() {
         x.play();
@@ -13,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     pauseButton.addEventListener('click', function() {
         x.pause();
+        y.pause();
     });
 
 
@@ -41,6 +45,12 @@ document.addEventListener("DOMContentLoaded", function() {
         highlightMovableTiles();
     });
 
+    var startGame = document.getElementById('startGame');
+    startGame.addEventListener('click', function() {
+        alert("New game! Gooooood luck!");
+        secCollector(false);
+    });
+
     var solvePuzzleButton = document.getElementById('solvebutton');
     solvePuzzleButton.addEventListener('click', function() {
         resetPuzzleToInitialState();
@@ -58,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!isShuffling && isPuzzleSolved()) {
                 displaySolvedNotification();
+                saveScore();
+            } else {
+                countCollector();
             }
         }
     }
@@ -154,5 +167,89 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displaySolvedNotification() {
         alert("Congratulations! You've solved the puzzle!");
+        x.pause();
+        y.pause();
+    }
+
+
+    //antonina changes (sorry, this is me battling merge conflicts)
+    function saveScore() {
+        //reset counter function and clear status
+        secCollector(true);
+        //get current score status 
+        var scoreSec = parseInt(document.getElementById("time-elapsed").innerHTML, 10);
+        var moves = parseInt(document.getElementById("clicks-elapsed").innerHTML, 10);
+
+        //clear current score
+        document.getElementById("time-elapsed").innerHTML = "";
+        document.getElementById("clicks-elapsed").innerHTML = ""; 
+
+        //fill in user's past scores to put in saved scores for display and sorting based on highest score
+        var t1 = document.getElementById("time1").innerHTML != "" || null ? parseInt(document.getElementById("time1").innerHTML, 10) : null;
+        var m1 = document.getElementById("moves1").innerHTML != "" || null ? parseInt(document.getElementById("moves1").innerHTML, 10) : null;
+        var t2 = document.getElementById("time2").innerHTML != "" || null ? parseInt(document.getElementById("time2").innerHTML, 10) : null;
+        var m2 = document.getElementById("moves2").innerHTML != "" || null ? parseInt(document.getElementById("moves2").innerHTML, 10) : null;
+        var t3 =  document.getElementById("time3").innerHTML != "" || null ? parseInt(document.getElementById("time3").innerHTML, 10) : null;
+        var m3 = document.getElementById("moves3").innerHTML != "" || null ? parseInt(document.getElementById("moves3").innerHTML, 10) : null;
+        var t4 = document.getElementById("time4").innerHTML != "" || null ? parseInt(document.getElementById("time4").innerHTML, 10) : null;
+        var m4 = document.getElementById("moves4").innerHTML != "" || null ? parseInt(document.getElementById("moves4").innerHTML, 10) : null;
+        var allSavedScores = [[t1,m1],[t2,m2],[t3,m3],[t4,m4]];
+
+        // check if there is a non filled out 
+        for(b=0; b<4;b++) {
+            if(allSavedScores[b][0] == null) {
+                allSavedScores[b][0] = scoreSec;
+                allSavedScores[b][1] = moves;
+                break;
+            } else if (b == 3) {
+                allSavedScores[b][0] = scoreSec;
+                allSavedScores[b][1] = moves;
+                break;
+            }
+        }
+        allSavedScores.sort(function(a,b) {
+            return a[0]-b[0]
+        });
+        console.log(allSavedScores[3][0] + " " + allSavedScores[3][1]);
+            document.getElementById("time1").innerHTML = allSavedScores[0][0] != null? allSavedScores[0][0] : "";
+            document.getElementById("time2").innerHTML = allSavedScores[1][0] != null? allSavedScores[1][0] : "";
+            document.getElementById("time3").innerHTML = allSavedScores[2][0] != null? allSavedScores[2][0] : "";
+            document.getElementById("time4").innerHTML = allSavedScores[3][0] != null? allSavedScores[3][0] : "";
+            document.getElementById("moves1").innerHTML = allSavedScores[0][1] != null? allSavedScores[0][1] : "";
+            document.getElementById("moves2").innerHTML = allSavedScores[1][1] != null? allSavedScores[1][1] : "";
+            document.getElementById("moves3").innerHTML = allSavedScores[2][1] != null? allSavedScores[2][1] : "";
+            document.getElementById("moves4").innerHTML = allSavedScores[3][1] != null? allSavedScores[3][1] : "";
+    }
+
+
+    function secCollector(cancelme) {
+        if(cancelme == true) {
+            clearInterval(cancel); 
+            seconds = 0;
+            moveCount = 0;
+            cancel = setInterval(incrementSeconds, 20903983209830*5);
+            return;
+        } else if (cancelme == false) {
+            seconds = 0;
+            var secondsCount = document.getElementById("time-elapsed"); 
+
+            function incrementSeconds() {
+                seconds += 1;
+                secondsCount.innerHTML = seconds;
+                if (seconds == 15) {
+                    if(!x.paused) {
+                        x.pause();
+                        y.play();
+                    }
+
+                }
+            }
+
+            cancel = setInterval(incrementSeconds, 1000);
+    }
+    }
+    function countCollector() {
+        moveCount++;
+        document.getElementById("clicks-elapsed").innerHTML = moveCount; 
     }
 });

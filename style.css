@@ -27,6 +27,11 @@
     display: block;
     margin: 20px auto;
 }
+#startGame {
+    display: inline-block;
+    margin-left: 810px;
+    margin-top: 20px;
+}
 
 #play {
     position: relative;
@@ -42,4 +47,17 @@ button {
     width: auto;
     border-width: 3px;
     font-weight: bolder;
+}
+
+td {
+    border: 1px solid;
+    width: 350px;
+    height: 60px;
+  }
+
+  #tablescores {
+    float:inline-start;
+    margin-left: 80px;
+    height: 300px;
+    width: 400px;
 }
