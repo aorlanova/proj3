@@ -43,3 +43,9 @@ button {
     border-width: 3px;
     font-weight: bolder;
 }
+
+#tablescores {
+    float:inline-start;
+    margin-left: 80px;
+
+}
