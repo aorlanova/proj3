@@ -47,5 +47,13 @@ button {
 #tablescores {
     float:inline-start;
     margin-left: 80px;
-
+    height: 300px;
+    width: 400px;
 }
+
+ td {
+    border: 1px solid;
+    width: 350px;
+    height: 60px;
+  }
+  

@@ -9,12 +9,46 @@
 <body>
     <audio id="myAudio">
         <source src="Elevator Music (loop).mp3" type="audio/mpeg">
+        <source src="intense.mp3" type="audio/mpeg">
       </audio>
+      <audio id="intenseAud">
+      <source src="intense.mp3" type="audio/mpeg">
+    </audio>
       <div id="status">
         <table id="tablescores">
             <tr>
                 <td>Your Status</td>
                 <td>Highest Scores</td>
+            </tr>
+            <tr>
+                <td rowspan="5" id="statContainer">
+                    <p>TIME ELAPSED(seconds): </p>
+                    <p id="time-elapsed"></p>  <br>
+                    <p>CLICKS TAKEN: </p>
+                    <p id="clicks-elapsed"></p> <br>
+                </td>
+                <td>
+                    time: <p id="time1" style="display: inline-block;"></p> 
+                    moves: <p id="moves1" style="display: inline-block;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    time: <p id="time2" style="display: inline-block;"></p> 
+                    moves: <p id="moves2" style="display: inline-block;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    time: <p id="time3" style="display: inline-block;"></p> 
+                    moves: <p id="moves3" style="display: inline-block;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    time: <p id="time4" style="display: inline-block;"></p> 
+                    moves: <p id="moves4" style="display: inline-block;"></p>
+                </td>
             </tr>
         </table>
     </div>
