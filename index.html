@@ -15,6 +15,7 @@
       </audio>
       <div id="status">
         <table id="tablescores">
+		<div id="endofgamenotification"> </div>
             <tr>
                 <td>Your Status</td>
                 <td>Highest Scores</td>
@@ -51,16 +52,32 @@
             </tr>
         </table>
     </div>
-	<div id="endofgamenotification">
+	<div id="toparea">
+		<h1 class="top">Fifteen Puzzle</h1>
+		<p class="sentence1">
+		  The goal of the fifteen puzzle is to un-jumble its fifteen squares by
+		  repeatedly making moves that slide squares into the empty space. How
+		  quickly can you solve it?
+		  <button id="startGame">Start Game</button><br>
+		  <div class="imageSwap">
+			<button id="back">Last Pic</button>
+			<button id="next">Next Pic</button>
+			</div>
+		</p>
+		<div id="puzzlearea"></div>
+		<button id="shufflebutton">Shuffle</button>
+		<button id="solvebutton">Solve</button>
+		<p class="sentence2">
+		  American puzzle author and mathematician Sam Loyd is often falsely
+		  credited with creating the puzzle; indeed, Loyd claimed from 1891 until
+		  his death in 1911 that he invented it. The puzzle was actually created
+		  around 1874 by Noyes Palmer Chapman, a postmaster in Canastota, New York.
+		</p>
 	</div>
-    <div id="puzzlearea">
-    </div>
-
-    <button id="startGame">Start Game</button><button id="shufflebutton">Shuffle</button> 
-    <button id="solvebutton">Solve</button>
     <button id="play">Play Audio</button>
     <button id="pause">Pause</button> 
-
+	
+	
     <p>
         <a href="https://validator.w3.org/">HTML Validator</a> |
         <a href="https://jigsaw.w3.org/css-validator/">CSS Validator</a> |
