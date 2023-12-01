@@ -89,9 +89,9 @@ document.addEventListener("DOMContentLoaded", function() {
             var movableTiles = findMovableTiles();
             var randomTileIndex = Math.floor(Math.random() * movableTiles.length);
             var tileToShuffle = movableTiles[randomTileIndex];
+            moveCount = 299;
             moveSelectedTile(tileToShuffle.element);
         }
-
         isShuffling = false;
     }
 
