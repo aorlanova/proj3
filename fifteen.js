@@ -166,9 +166,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displaySolvedNotification() {
-        alert("Congratulations! You've solved the puzzle!");
         x.pause();
         y.pause();
+		
+		var endOfGameNotification = document.getElementById('endofgamenotification');
+
+		var trophyImage = document.createElement('img');
+		trophyImage.src = 'trophy.jpg'; 
+
+		var message = document.createElement('p');
+		message.textContent = "Congratulations! You've solved the puzzle!";
+
+		endOfGameNotification.innerHTML = '';
+
+		endOfGameNotification.appendChild(trophyImage);
+		endOfGameNotification.appendChild(message);
+		
+		setTimeout(function() {
+        endOfGameNotification.innerHTML = '';
+		}, 3000);
     }
 
 

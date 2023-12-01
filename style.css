@@ -61,3 +61,16 @@ td {
     height: 300px;
     width: 400px;
 }
+#endofgamenotification {
+    text-align: center;
+    margin-top: 50px;
+	background: white;
+	width:200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#endofgamenotification img {
+    width: 60px; 
+    height: 60px;
+}
