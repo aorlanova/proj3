@@ -266,6 +266,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     function countCollector() {
         moveCount++;
-        document.getElementById("clicks-elapsed").innerHTML = moveCount; 
+        document.getElementById("clicks-elapsed").innerHTML = (moveCount - 300); 
     }
 });
