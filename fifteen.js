@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
     startGame.addEventListener('click', function() {
         alert("New game! Gooooood luck!");
         secCollector(false);
+
     });
 
     var solvePuzzleButton = document.getElementById('solvebutton');
@@ -247,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         } else if (cancelme == false) {
             seconds = 0;
+            moveCount = 300;
             var secondsCount = document.getElementById("time-elapsed"); 
 
             function incrementSeconds() {
