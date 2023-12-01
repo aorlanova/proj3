@@ -1,71 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fifteen Puzzle</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <audio id="myAudio">
-        <source src="Elevator Music (loop).mp3" type="audio/mpeg">
-      </audio>
-      <audio id="intenseAud">
-        <source src="intense.mp3" type="audio/mpeg">
-      </audio>
-      <div id="status">
-        <table id="tablescores">
-            <tr>
-                <td>Your Status</td>
-                <td>Highest Scores</td>
-            </tr>
-            <tr>
-                <td rowspan="5" id="statContainer">
-                    <p>TIME ELAPSED(seconds): </p>
-                    <p id="time-elapsed"></p>  <br>
-                    <p>CLICKS TAKEN: </p>
-                    <p id="clicks-elapsed"></p> <br>
-                </td>
-                <td>
-                    time: <p id="time1" style="display: inline-block;"></p> 
-                    moves: <p id="moves1" style="display: inline-block;"></p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    time: <p id="time2" style="display: inline-block;"></p> 
-                    moves: <p id="moves2" style="display: inline-block;"></p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    time: <p id="time3" style="display: inline-block;"></p> 
-                    moves: <p id="moves3" style="display: inline-block;"></p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    time: <p id="time4" style="display: inline-block;"></p> 
-                    moves: <p id="moves4" style="display: inline-block;"></p>
-                </td>
-            </tr>
-        </table>
-    </div>
-	<div id="endofgamenotification">
-	</div>
-    <div id="puzzlearea">
-    </div>
+      <source src="Elevator Music (loop).mp3" type="audio/mpeg" />
+    </audio>
+    <h1 class="top">Fifteen Puzzle</h1>
+    <p class="sentence">
+      The goal of the fifteen puzzle is to un-jumble its fifteen squares by
+      repeatedly making moves that slide squares into the empty space. How
+      quickly can you solve it?
+    </p>
 
-    <button id="startGame">Start Game</button><button id="shufflebutton">Shuffle</button> 
+    <div class="imageSwap">
+      <button id="back">Last Pic</button>
+      <button id="next">Next Pic</button>
+    </div>
+    <div id="puzzlearea"></div>
+
+    <button id="shufflebutton">Shuffle</button>
+    <p class="sentence">
+      American puzzle author and mathematician Sam Loyd is often falsely
+      credited with creating the puzzle; indeed, Loyd claimed from 1891 until
+      his death in 1911 that he invented it. The puzzle was actually created
+      around 1874 by Noyes Palmer Chapman, a postmaster in Canastota, New York.
+    </p>
     <button id="solvebutton">Solve</button>
     <button id="play">Play Audio</button>
-    <button id="pause">Pause</button> 
+    <button id="pause">Pause</button>
 
     <p>
-        <a href="https://validator.w3.org/">HTML Validator</a> |
-        <a href="https://jigsaw.w3.org/css-validator/">CSS Validator</a> |
-        <a href="https://www.jslint.com/">JSLint</a>
+      <a href="https://validator.w3.org/">HTML Validator</a> |
+      <a href="https://jigsaw.w3.org/css-validator/">CSS Validator</a> |
+      <a href="https://www.jslint.com/">JSLint</a>
     </p>
     <script src="fifteen.js"></script>
-</body>
+  </body>
 </html>
