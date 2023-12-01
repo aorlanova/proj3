@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
     var y = document.getElementById("intenseAud");
     var moveCount = 0;
     var cancel;
+	
+	var currentImageIndex = 0;
+	var images = ["car.avif", "bmw.jpg", "bugatti.jpeg", "Ferrari458.jpg"];
+	var nextPicButton = document.getElementById("next");
+	var lastPicButton = document.getElementById("back");
+
 
     playButton.addEventListener('click', function() {
         x.play();
@@ -18,7 +24,14 @@ document.addEventListener("DOMContentLoaded", function() {
         x.pause();
         y.pause();
     });
+	
+	nextPicButton.addEventListener("click", function () {
+		switchImage("next");
+	});
 
+	lastPicButton.addEventListener("click", function () {
+		switchImage("last");
+	});
 
     // Creating and placing each puzzle tile
     for (var tileNumber = 0; tileNumber < 15; tileNumber++) {
@@ -46,16 +59,30 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     var startGame = document.getElementById('startGame');
-    startGame.addEventListener('click', function() {
+		startGame.addEventListener('click', function() {
         alert("New game! Gooooood luck!");
         secCollector(false);
-
+		shufflePuzzleTiles();
     });
 
     var solvePuzzleButton = document.getElementById('solvebutton');
-    solvePuzzleButton.addEventListener('click', function() {
+		solvePuzzleButton.addEventListener('click', function() {
         resetPuzzleToInitialState();
     });
+	
+	function switchImage(direction) {
+		if (direction == "next") {
+		  currentImageIndex = (currentImageIndex + 1) % images.length;
+		} else if (direction === "last") {
+		  currentImageIndex =
+			(currentImageIndex - 1 + images.length) % images.length;
+		}
+
+		for (var i = 0; i < allPuzzleTiles.length; i++) {
+		  allPuzzleTiles[i].style.backgroundImage =
+			'url("' + images[currentImageIndex] + '")';
+		}
+	}
 
     function moveSelectedTile(tileToMove) {
         var tileXPos = parseInt(tileToMove.style.left) / 100;
@@ -90,9 +117,9 @@ document.addEventListener("DOMContentLoaded", function() {
             var movableTiles = findMovableTiles();
             var randomTileIndex = Math.floor(Math.random() * movableTiles.length);
             var tileToShuffle = movableTiles[randomTileIndex];
-            moveCount = 299;
             moveSelectedTile(tileToShuffle.element);
         }
+
         isShuffling = false;
     }
 
@@ -248,7 +275,6 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         } else if (cancelme == false) {
             seconds = 0;
-            moveCount = 300;
             var secondsCount = document.getElementById("time-elapsed"); 
 
             function incrementSeconds() {

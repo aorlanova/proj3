@@ -2,7 +2,7 @@
     width: 400px;
     height: 400px;
     position: relative;
-    margin: auto;
+    margin-left:760px;
 }
 
 .tile {
@@ -23,21 +23,39 @@
     text-decoration: underline;
 }
 
-#shufflebutton {
-    display: block;
-    margin: 20px auto;
-}
 #startGame {
-    display: inline-block;
-    margin-left: 810px;
-    margin-top: 20px;
+    display: block;
+	height: 50px;
+    width: auto;
+    margin-left: auto;
+	margin-right: auto;
+    margin-top: 5px;
+	background-color: #7dc6e3;
 }
-
+#shufflebutton, #solvebutton {
+	display: block;
+	height: 30px;
+    width: auto;
+    margin-left: 950px;
+	margin-right: auto;
+    margin-top: 5px;
+}
+#solvebutton{
+	margin-left: 955px;
+	background-color: #d68476;
+}
 #play {
+	margin-top:5px;
     position: relative;
-    margin-left: 42%;
+    margin-left: 900px;
+	background-color:#a37db0;
 }
-
+#pause{
+	background-color:#a37db0;
+}
+#toparea{
+	width:1500px;
+}
 body {
     background-image: url(Screenshot\ 2566-11-28\ at\ 4.22.48\ PM.png);
 }
@@ -56,21 +74,42 @@ td {
   }
 
   #tablescores {
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	background-color: #ccdaf0;
     float:inline-start;
-    margin-left: 80px;
+    margin-left: 20px;
+	margin-right:20px;
     height: 300px;
     width: 400px;
 }
 #endofgamenotification {
     text-align: center;
     margin-top: 50px;
-	background: white;
-	width:200px;
-	margin-left: auto;
-	margin-right: auto;
+	background: #ccdaf0;
+	width:400px;
+	margin-left: 760px;
+	font-family: "Courier New", Courier, monospace;
 }
 
 #endofgamenotification img {
     width: 60px; 
     height: 60px;
+	text-align: center;
+}
+.top {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.sentence1, .sentence2 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: large;
+}
+.sentence2{
+	margin-left: 440px;
+}
+
+.imageSwap {
+  text-align: center;
+  margin-bottom: 5px;
 }
